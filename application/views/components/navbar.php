@@ -84,10 +84,13 @@
 				<div class="bingkai">
 					<div class="pasfoto">
 					<?php
-					$file = "./assets/img/fotomahasiswa/".$this->session->userdata("ses_id").".jpg";
-					$file_headers = @get_headers($file);
+					// $file = "http://localhost/elearning2/assets/img/fotomahasiswa/".$this->session->userdata("ses_id").".jpg";
+					$file = file_exists("./assets/img/fotomahasiswa/".$this->session->userdata("ses_id").".jpg");
+					// $file_headers = @get_headers($file);
 					// print_r($file_headers);
-					if(!$file_headers || $file_headers[0] == 'HTTP/1.0 404 Not Found') { ?>
+					//if(!$file_headers || $file_headers[0] == 'HTTP/1.0 404 Not Found') {
+					if($file == false) { 
+					?>
 						<img src="<?= base_url("assets/img/avatar1.png")?>" alt="">
 					<?php }
 					else { ?>

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 5.0.3
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 18, 2021 at 03:17 PM
--- Server version: 5.7.33-0ubuntu0.16.04.1
--- PHP Version: 5.6.40-50+ubuntu16.04.1+deb.sury.org+1
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 19 Bulan Mei 2021 pada 10.08
+-- Versi server: 8.0.22
+-- Versi PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,16 +24,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblabsensi`
+-- Struktur dari tabel `tblabsensi`
 --
 
 CREATE TABLE `tblabsensi` (
-  `idabsensi` int(11) NOT NULL,
+  `idabsensi` int NOT NULL,
   `kodemk` varchar(20) NOT NULL,
   `kelas` enum('P1','P2','M1') NOT NULL,
   `nim` varchar(10) NOT NULL,
   `namamhs` varchar(50) NOT NULL,
-  `kelompok` int(11) NOT NULL,
+  `kelompok` int NOT NULL,
   `a1` enum('Hadir','Tidak') DEFAULT NULL,
   `a2` enum('Hadir','Tidak') DEFAULT NULL,
   `a3` enum('Hadir','Tidak') DEFAULT NULL,
@@ -51,14 +52,21 @@ CREATE TABLE `tblabsensi` (
   `a16` enum('Hadir','Tidak') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblabsensi`
+--
+
+INSERT INTO `tblabsensi` (`idabsensi`, `kodemk`, `kelas`, `nim`, `namamhs`, `kelompok`, `a1`, `a2`, `a3`, `a4`, `a5`, `a6`, `a7`, `a8`, `a9`, `a10`, `a11`, `a12`, `a13`, `a14`, `a15`, `a16`) VALUES
+(1, 'MK23', 'P1', '2018240069', 'badrul', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbladmin`
+-- Struktur dari tabel `tbladmin`
 --
 
 CREATE TABLE `tbladmin` (
-  `idadmin` int(11) NOT NULL,
+  `idadmin` int NOT NULL,
   `namaadmin` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -71,7 +79,7 @@ CREATE TABLE `tbladmin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbladmin`
+-- Dumping data untuk tabel `tbladmin`
 --
 
 INSERT INTO `tbladmin` (`idadmin`, `namaadmin`, `alamat`, `email`, `tanggallahir`, `agama`, `jekel`, `telepon`, `status`, `password`) VALUES
@@ -80,12 +88,12 @@ INSERT INTO `tbladmin` (`idadmin`, `namaadmin`, `alamat`, `email`, `tanggallahir
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbldiskusi`
+-- Struktur dari tabel `tbldiskusi`
 --
 
 CREATE TABLE `tbldiskusi` (
-  `iddiskusi` int(11) NOT NULL,
-  `idmateri` int(11) NOT NULL,
+  `iddiskusi` int NOT NULL,
+  `idmateri` int NOT NULL,
   `userid` varchar(25) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `komentar` longtext NOT NULL,
@@ -95,7 +103,7 @@ CREATE TABLE `tbldiskusi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbldosen`
+-- Struktur dari tabel `tbldosen`
 --
 
 CREATE TABLE `tbldosen` (
@@ -110,27 +118,42 @@ CREATE TABLE `tbldosen` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbldosen`
+--
+
+INSERT INTO `tbldosen` (`iddosen`, `nama`, `alamat`, `email`, `tanggallahir`, `agama`, `jekel`, `telepon`, `password`) VALUES
+('218240037', 'Wawan', 'cempaka II', 'wawampras@gmail.com', '1998-06-13', 'Islam', 'L', '081213376129', 'e10adc3949ba59abbe56e057f20f883e');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblgambar`
+-- Struktur dari tabel `tblgambar`
 --
 
 CREATE TABLE `tblgambar` (
-  `idgambar` int(11) NOT NULL,
+  `idgambar` int NOT NULL,
   `nim` varchar(10) NOT NULL,
   `file` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblgambar`
+--
+
+INSERT INTO `tblgambar` (`idgambar`, `nim`, `file`) VALUES
+(1, '2018555452', '2018555452.jpg'),
+(2, '2018240069', '2018240069.jpeg');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbljawaban`
+-- Struktur dari tabel `tbljawaban`
 --
 
 CREATE TABLE `tbljawaban` (
-  `idjawaban` int(11) NOT NULL,
-  `idtugas` int(11) NOT NULL,
+  `idjawaban` int NOT NULL,
+  `idtugas` int NOT NULL,
   `idmhs` varchar(25) NOT NULL,
   `namamhs` varchar(50) NOT NULL,
   `jawaban` longtext NOT NULL,
@@ -140,7 +163,7 @@ CREATE TABLE `tbljawaban` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmahasiswa`
+-- Struktur dari tabel `tblmahasiswa`
 --
 
 CREATE TABLE `tblmahasiswa` (
@@ -159,33 +182,48 @@ CREATE TABLE `tblmahasiswa` (
   `file` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblmahasiswa`
+--
+
+INSERT INTO `tblmahasiswa` (`nim`, `namamhs`, `alamat`, `email`, `tanggallahir`, `agama`, `jekel`, `telepon`, `prodi`, `semester`, `kelas`, `password`, `file`) VALUES
+('2018240069', 'badrul', 'jfjjf', 'hfhfh@hh.com', '1999-09-13', 'Islam', 'L', '554555', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL),
+('2018555452', 'bahtiar', 'jl. situ', 'bahtiar@gmail.com', '1997-07-23', 'Islam', 'L', '54424211', 'SI', '3', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmatakuliah`
+-- Struktur dari tabel `tblmatakuliah`
 --
 
 CREATE TABLE `tblmatakuliah` (
   `kodemk` varchar(20) NOT NULL,
   `namamk` varchar(50) NOT NULL,
-  `iddosen` int(11) NOT NULL,
+  `iddosen` int NOT NULL,
   `namadosen` varchar(50) NOT NULL,
   `prodi` enum('TI','SI') NOT NULL,
   `semester` enum('1','2','3','4','5','6','7','8') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblmatakuliah`
+--
+
+INSERT INTO `tblmatakuliah` (`kodemk`, `namamk`, `iddosen`, `namadosen`, `prodi`, `semester`) VALUES
+('MK23', 'Kerja Praktek', 218240037, 'Wawan', 'SI', '6');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmatakuliah_sec`
+-- Struktur dari tabel `tblmatakuliah_sec`
 --
 
 CREATE TABLE `tblmatakuliah_sec` (
-  `kodemk` int(11) NOT NULL
+  `kodemk` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tblmatakuliah_sec`
+-- Dumping data untuk tabel `tblmatakuliah_sec`
 --
 
 INSERT INTO `tblmatakuliah_sec` (`kodemk`) VALUES
@@ -210,16 +248,17 @@ INSERT INTO `tblmatakuliah_sec` (`kodemk`) VALUES
 (19),
 (20),
 (21),
-(22);
+(22),
+(23);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmateri`
+-- Struktur dari tabel `tblmateri`
 --
 
 CREATE TABLE `tblmateri` (
-  `idmateri` int(11) NOT NULL,
+  `idmateri` int NOT NULL,
   `idpengirim` varchar(25) NOT NULL,
   `namapengirim` varchar(50) NOT NULL,
   `matakuliah` varchar(100) NOT NULL,
@@ -235,32 +274,39 @@ CREATE TABLE `tblmateri` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblpengumuman`
+-- Struktur dari tabel `tblpengumuman`
 --
 
 CREATE TABLE `tblpengumuman` (
-  `idpengumuman` int(11) NOT NULL,
+  `idpengumuman` int NOT NULL,
   `idpengirim` varchar(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `isi` longtext NOT NULL,
   `tanggal` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblpengumuman`
+--
+
+INSERT INTO `tblpengumuman` (`idpengumuman`, `idpengirim`, `nama`, `isi`, `tanggal`) VALUES
+(1, '1002', 'admin', '<p>Diberitahukan kepada mahasiswa untuk menyelesaikan laporan KP sampai BAB3. Terimakasih</p>\r\n', '2021-05-18 16:32:03');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblriwayatnilai`
+-- Struktur dari tabel `tblriwayatnilai`
 --
 
 CREATE TABLE `tblriwayatnilai` (
-  `idnilai` int(11) NOT NULL,
+  `idnilai` int NOT NULL,
   `kodemk` varchar(20) NOT NULL,
   `nim` varchar(10) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `tipesoal` enum('e','p') NOT NULL,
   `tipetugas` enum('quiz','tugas','uts','kelompok') NOT NULL,
   `idsoal` varchar(50) NOT NULL,
-  `nosoal` int(11) NOT NULL,
+  `nosoal` int NOT NULL,
   `isisoal` longtext NOT NULL,
   `jawabesai` longtext,
   `jawabpilgan` enum('a','b','c','d') DEFAULT NULL,
@@ -269,20 +315,20 @@ CREATE TABLE `tblriwayatnilai` (
   `c` longtext,
   `d` longtext,
   `status` enum('proses','belum','selesai') NOT NULL,
-  `nilai` int(11) DEFAULT NULL,
+  `nilai` int DEFAULT NULL,
   `tanggal` datetime DEFAULT NULL,
-  `kelompok` int(11) DEFAULT NULL
+  `kelompok` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblriwayatsoal`
+-- Struktur dari tabel `tblriwayatsoal`
 --
 
 CREATE TABLE `tblriwayatsoal` (
-  `idriwayatsoal` int(11) NOT NULL,
-  `idsoalriw` int(11) NOT NULL,
+  `idriwayatsoal` int NOT NULL,
+  `idsoalriw` int NOT NULL,
   `tipesoal` enum('e','p') NOT NULL,
   `kodemk` varchar(20) NOT NULL,
   `nim` varchar(10) DEFAULT NULL,
@@ -292,21 +338,21 @@ CREATE TABLE `tblriwayatsoal` (
   `semester` enum('1','2','3','4','5','6','7','8') NOT NULL,
   `status` enum('selesai','belum','proses') NOT NULL,
   `tanggal` datetime NOT NULL,
-  `nilai` int(11) DEFAULT NULL,
+  `nilai` int DEFAULT NULL,
   `absensike` varchar(2) DEFAULT NULL,
-  `kelompok` int(11) DEFAULT NULL
+  `kelompok` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblsoalesai`
+-- Struktur dari tabel `tblsoalesai`
 --
 
 CREATE TABLE `tblsoalesai` (
-  `idesai` int(11) NOT NULL,
-  `idsoal` int(11) NOT NULL,
-  `noesai` int(11) NOT NULL,
+  `idesai` int NOT NULL,
+  `idsoal` int NOT NULL,
+  `noesai` int NOT NULL,
   `matakuliah` text NOT NULL,
   `isiesai` longtext NOT NULL,
   `jawaban` longtext,
@@ -316,13 +362,13 @@ CREATE TABLE `tblsoalesai` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblsoalpilgan`
+-- Struktur dari tabel `tblsoalpilgan`
 --
 
 CREATE TABLE `tblsoalpilgan` (
-  `idpilgan` int(11) NOT NULL,
+  `idpilgan` int NOT NULL,
   `idsoalpil` varchar(11) NOT NULL,
-  `nopilgan` int(11) NOT NULL,
+  `nopilgan` int NOT NULL,
   `matakuliah` text NOT NULL,
   `isipilgan` longtext NOT NULL,
   `jawabanpilgan` enum('A','B','C','D') NOT NULL,
@@ -336,11 +382,11 @@ CREATE TABLE `tblsoalpilgan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbltugas`
+-- Struktur dari tabel `tbltugas`
 --
 
 CREATE TABLE `tbltugas` (
-  `idtugas` int(11) NOT NULL,
+  `idtugas` int NOT NULL,
   `iddosen` varchar(25) NOT NULL,
   `namadosen` varchar(50) NOT NULL,
   `matakuliah` varchar(100) NOT NULL,
@@ -353,10 +399,17 @@ CREATE TABLE `tbltugas` (
   `semester` enum('1','2','3','4','5','6','7','8') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbltugas`
+--
+
+INSERT INTO `tbltugas` (`idtugas`, `iddosen`, `namadosen`, `matakuliah`, `judultugas`, `tanggal_upload`, `batas_tanggal`, `isi`, `tipe`, `prodi`, `semester`) VALUES
+(1, '218240037', 'Wawan', 'MK23', 'fgfgg', '2021-05-19 13:52:06', NULL, '<p>sdsdfdff</p>\r\n', 'tugas', 'SI', '6');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbluser`
+-- Struktur dari tabel `tbluser`
 --
 
 CREATE TABLE `tbluser` (
@@ -369,11 +422,11 @@ CREATE TABLE `tbluser` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uploaded_images`
+-- Struktur dari tabel `uploaded_images`
 --
 
 CREATE TABLE `uploaded_images` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `file_dir` varchar(120) NOT NULL,
   `date_uploaded` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -383,187 +436,202 @@ CREATE TABLE `uploaded_images` (
 --
 
 --
--- Indexes for table `tblabsensi`
+-- Indeks untuk tabel `tblabsensi`
 --
 ALTER TABLE `tblabsensi`
   ADD PRIMARY KEY (`idabsensi`);
 
 --
--- Indexes for table `tbladmin`
+-- Indeks untuk tabel `tbladmin`
 --
 ALTER TABLE `tbladmin`
   ADD PRIMARY KEY (`idadmin`);
 
 --
--- Indexes for table `tbldiskusi`
+-- Indeks untuk tabel `tbldiskusi`
 --
 ALTER TABLE `tbldiskusi`
   ADD PRIMARY KEY (`iddiskusi`);
 
 --
--- Indexes for table `tbldosen`
+-- Indeks untuk tabel `tbldosen`
 --
 ALTER TABLE `tbldosen`
   ADD PRIMARY KEY (`iddosen`);
 
 --
--- Indexes for table `tblgambar`
+-- Indeks untuk tabel `tblgambar`
 --
 ALTER TABLE `tblgambar`
   ADD PRIMARY KEY (`idgambar`);
 
 --
--- Indexes for table `tbljawaban`
+-- Indeks untuk tabel `tbljawaban`
 --
 ALTER TABLE `tbljawaban`
   ADD PRIMARY KEY (`idjawaban`);
 
 --
--- Indexes for table `tblmahasiswa`
+-- Indeks untuk tabel `tblmahasiswa`
 --
 ALTER TABLE `tblmahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
--- Indexes for table `tblmatakuliah`
+-- Indeks untuk tabel `tblmatakuliah`
 --
 ALTER TABLE `tblmatakuliah`
   ADD PRIMARY KEY (`kodemk`);
 
 --
--- Indexes for table `tblmatakuliah_sec`
+-- Indeks untuk tabel `tblmatakuliah_sec`
 --
 ALTER TABLE `tblmatakuliah_sec`
   ADD PRIMARY KEY (`kodemk`);
 
 --
--- Indexes for table `tblmateri`
+-- Indeks untuk tabel `tblmateri`
 --
 ALTER TABLE `tblmateri`
   ADD PRIMARY KEY (`idmateri`);
 
 --
--- Indexes for table `tblpengumuman`
+-- Indeks untuk tabel `tblpengumuman`
 --
 ALTER TABLE `tblpengumuman`
   ADD PRIMARY KEY (`idpengumuman`);
 
 --
--- Indexes for table `tblriwayatnilai`
+-- Indeks untuk tabel `tblriwayatnilai`
 --
 ALTER TABLE `tblriwayatnilai`
   ADD PRIMARY KEY (`idnilai`);
 
 --
--- Indexes for table `tblriwayatsoal`
+-- Indeks untuk tabel `tblriwayatsoal`
 --
 ALTER TABLE `tblriwayatsoal`
   ADD PRIMARY KEY (`idriwayatsoal`);
 
 --
--- Indexes for table `tblsoalesai`
+-- Indeks untuk tabel `tblsoalesai`
 --
 ALTER TABLE `tblsoalesai`
   ADD PRIMARY KEY (`idesai`);
 
 --
--- Indexes for table `tblsoalpilgan`
+-- Indeks untuk tabel `tblsoalpilgan`
 --
 ALTER TABLE `tblsoalpilgan`
   ADD PRIMARY KEY (`idpilgan`);
 
 --
--- Indexes for table `tbltugas`
+-- Indeks untuk tabel `tbltugas`
 --
 ALTER TABLE `tbltugas`
   ADD PRIMARY KEY (`idtugas`);
 
 --
--- Indexes for table `tbluser`
+-- Indeks untuk tabel `tbluser`
 --
 ALTER TABLE `tbluser`
   ADD PRIMARY KEY (`userid`);
 
 --
--- Indexes for table `uploaded_images`
+-- Indeks untuk tabel `uploaded_images`
 --
 ALTER TABLE `uploaded_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tblabsensi`
+-- AUTO_INCREMENT untuk tabel `tblabsensi`
 --
 ALTER TABLE `tblabsensi`
-  MODIFY `idabsensi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idabsensi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `tbladmin`
+-- AUTO_INCREMENT untuk tabel `tbladmin`
 --
 ALTER TABLE `tbladmin`
-  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
+  MODIFY `idadmin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
+
 --
--- AUTO_INCREMENT for table `tbldiskusi`
+-- AUTO_INCREMENT untuk tabel `tbldiskusi`
 --
 ALTER TABLE `tbldiskusi`
-  MODIFY `iddiskusi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddiskusi` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblgambar`
+-- AUTO_INCREMENT untuk tabel `tblgambar`
 --
 ALTER TABLE `tblgambar`
-  MODIFY `idgambar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idgambar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `tbljawaban`
+-- AUTO_INCREMENT untuk tabel `tbljawaban`
 --
 ALTER TABLE `tbljawaban`
-  MODIFY `idjawaban` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idjawaban` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblmatakuliah_sec`
+-- AUTO_INCREMENT untuk tabel `tblmatakuliah_sec`
 --
 ALTER TABLE `tblmatakuliah_sec`
-  MODIFY `kodemk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `kodemk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
 --
--- AUTO_INCREMENT for table `tblmateri`
+-- AUTO_INCREMENT untuk tabel `tblmateri`
 --
 ALTER TABLE `tblmateri`
-  MODIFY `idmateri` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idmateri` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblpengumuman`
+-- AUTO_INCREMENT untuk tabel `tblpengumuman`
 --
 ALTER TABLE `tblpengumuman`
-  MODIFY `idpengumuman` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpengumuman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `tblriwayatnilai`
+-- AUTO_INCREMENT untuk tabel `tblriwayatnilai`
 --
 ALTER TABLE `tblriwayatnilai`
-  MODIFY `idnilai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idnilai` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblriwayatsoal`
+-- AUTO_INCREMENT untuk tabel `tblriwayatsoal`
 --
 ALTER TABLE `tblriwayatsoal`
-  MODIFY `idriwayatsoal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idriwayatsoal` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblsoalesai`
+-- AUTO_INCREMENT untuk tabel `tblsoalesai`
 --
 ALTER TABLE `tblsoalesai`
-  MODIFY `idesai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idesai` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tblsoalpilgan`
+-- AUTO_INCREMENT untuk tabel `tblsoalpilgan`
 --
 ALTER TABLE `tblsoalpilgan`
-  MODIFY `idpilgan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpilgan` int NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tbltugas`
+-- AUTO_INCREMENT untuk tabel `tbltugas`
 --
 ALTER TABLE `tbltugas`
-  MODIFY `idtugas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtugas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `uploaded_images`
+-- AUTO_INCREMENT untuk tabel `uploaded_images`
 --
 ALTER TABLE `uploaded_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
