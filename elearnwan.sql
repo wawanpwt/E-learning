@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Bulan Mei 2021 pada 10.08
+-- Waktu pembuatan: 22 Bulan Mei 2021 pada 06.48
 -- Versi server: 8.0.22
 -- Versi PHP: 7.4.11
 
@@ -57,7 +57,11 @@ CREATE TABLE `tblabsensi` (
 --
 
 INSERT INTO `tblabsensi` (`idabsensi`, `kodemk`, `kelas`, `nim`, `namamhs`, `kelompok`, `a1`, `a2`, `a3`, `a4`, `a5`, `a6`, `a7`, `a8`, `a9`, `a10`, `a11`, `a12`, `a13`, `a14`, `a15`, `a16`) VALUES
-(1, 'MK23', 'P1', '2018240069', 'badrul', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(2, 'MK23', 'P1', '2018240001', 'Alfiyandi', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'MK24', 'P1', '2018240001', 'Alfiyandi', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'MK24', 'P1', '2018240083', 'Alderan Robi Aulia', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'MK24', 'P1', '2018240037', 'Wawan Prastyo', 0, 'Hadir', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'MK24', 'P1', '2018240007', 'Salman Al Farisyi', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,6 +104,13 @@ CREATE TABLE `tbldiskusi` (
   `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbldiskusi`
+--
+
+INSERT INTO `tbldiskusi` (`iddiskusi`, `idmateri`, `userid`, `nama`, `komentar`, `tanggal`) VALUES
+(1, 1, '2018240001', 'Alfiyandi', '<p>terimakasih bu</p>\r\n', '2021-05-20 14:56:18');
+
 -- --------------------------------------------------------
 
 --
@@ -123,7 +134,7 @@ CREATE TABLE `tbldosen` (
 --
 
 INSERT INTO `tbldosen` (`iddosen`, `nama`, `alamat`, `email`, `tanggallahir`, `agama`, `jekel`, `telepon`, `password`) VALUES
-('218240037', 'Wawan', 'cempaka II', 'wawampras@gmail.com', '1998-06-13', 'Islam', 'L', '081213376129', 'e10adc3949ba59abbe56e057f20f883e');
+('1234567890', 'Dosen', 'Jakarta', 'dosen123@gmail.com', '1992-09-12', 'Islam', 'P', '123456789', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -142,8 +153,10 @@ CREATE TABLE `tblgambar` (
 --
 
 INSERT INTO `tblgambar` (`idgambar`, `nim`, `file`) VALUES
-(1, '2018555452', '2018555452.jpg'),
-(2, '2018240069', '2018240069.jpeg');
+(3, '2018240001', '2018240001.jpg'),
+(4, '2018240083', '2018240083.jpg'),
+(5, '2018240037', '2018240037.jpg'),
+(6, '2018240007', '2018240007.jpg');
 
 -- --------------------------------------------------------
 
@@ -159,6 +172,13 @@ CREATE TABLE `tbljawaban` (
   `jawaban` longtext NOT NULL,
   `tgl_upload` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbljawaban`
+--
+
+INSERT INTO `tbljawaban` (`idjawaban`, `idtugas`, `idmhs`, `namamhs`, `jawaban`, `tgl_upload`) VALUES
+(1, 3, '2018240001', 'Alfiyandi', '<p>HADIR</p>\r\n', '2021-05-20 15:15:23');
 
 -- --------------------------------------------------------
 
@@ -187,8 +207,10 @@ CREATE TABLE `tblmahasiswa` (
 --
 
 INSERT INTO `tblmahasiswa` (`nim`, `namamhs`, `alamat`, `email`, `tanggallahir`, `agama`, `jekel`, `telepon`, `prodi`, `semester`, `kelas`, `password`, `file`) VALUES
-('2018240069', 'badrul', 'jfjjf', 'hfhfh@hh.com', '1999-09-13', 'Islam', 'L', '554555', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('2018555452', 'bahtiar', 'jl. situ', 'bahtiar@gmail.com', '1997-07-23', 'Islam', 'L', '54424211', 'SI', '3', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+('2018240001', 'Alfiyandi', 'Jakarta', 'alfiyandi90@gmail.com', '1998-09-13', 'Islam', 'L', '081315297002', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL),
+('2018240007', 'Salman Al Farisyi', 'Jakarta', 'salman123@gmail.com', '1998-09-23', 'Islam', 'L', '089525577881', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL),
+('2018240037', 'Wawan Prastyo', 'Bekasi', 'wawan12@gmail.com', '1998-06-13', 'Islam', 'L', '081213376129', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL),
+('2018240083', 'Alderan Robi Aulia', 'Bekasi', 'alderan0@gmail.com', '1997-04-23', 'Islam', 'L', '089617942201', 'SI', '6', 'P1', 'e10adc3949ba59abbe56e057f20f883e', NULL);
 
 -- --------------------------------------------------------
 
@@ -210,7 +232,7 @@ CREATE TABLE `tblmatakuliah` (
 --
 
 INSERT INTO `tblmatakuliah` (`kodemk`, `namamk`, `iddosen`, `namadosen`, `prodi`, `semester`) VALUES
-('MK23', 'Kerja Praktek', 218240037, 'Wawan', 'SI', '6');
+('MK24', 'E-LEARNING', 1234567890, 'Dosen', 'SI', '6');
 
 -- --------------------------------------------------------
 
@@ -249,7 +271,8 @@ INSERT INTO `tblmatakuliah_sec` (`kodemk`) VALUES
 (20),
 (21),
 (22),
-(23);
+(23),
+(24);
 
 -- --------------------------------------------------------
 
@@ -271,6 +294,14 @@ CREATE TABLE `tblmateri` (
   `pertemuan` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tblmateri`
+--
+
+INSERT INTO `tblmateri` (`idmateri`, `idpengirim`, `namapengirim`, `matakuliah`, `judulmateri`, `tanggal`, `file`, `tipe`, `prodi`, `semester`, `pertemuan`) VALUES
+(1, '1234567890', 'Dosen', 'MK24', 'Pengenalan CMS', '2021-05-20 14:55:21', '<p>Silahkan Pelajari ini</p>\r\n\r\n<p>https://www.niagahoster.co.id/blog/apa-itu-cms/</p>\r\n', 'd', 'SI', '6', '1'),
+(2, '1234567890', 'Dosen', 'MK24', 'Materi 1', '2021-05-20 00:00:00', 'E-LEARNING_materi_pert1.pdf', 'm', 'SI', '6', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -290,7 +321,7 @@ CREATE TABLE `tblpengumuman` (
 --
 
 INSERT INTO `tblpengumuman` (`idpengumuman`, `idpengirim`, `nama`, `isi`, `tanggal`) VALUES
-(1, '1002', 'admin', '<p>Diberitahukan kepada mahasiswa untuk menyelesaikan laporan KP sampai BAB3. Terimakasih</p>\r\n', '2021-05-18 16:32:03');
+(2, '1002', 'admin', '<p><strong>Diberitahukan kepada seluruh mahasiswa untuk melakukan pembayaran. jika ingin mencicil pembayaran, diharapkan menghubungi TU. Terimakasih</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n', '2021-05-20 09:30:46');
 
 -- --------------------------------------------------------
 
@@ -404,7 +435,9 @@ CREATE TABLE `tbltugas` (
 --
 
 INSERT INTO `tbltugas` (`idtugas`, `iddosen`, `namadosen`, `matakuliah`, `judultugas`, `tanggal_upload`, `batas_tanggal`, `isi`, `tipe`, `prodi`, `semester`) VALUES
-(1, '218240037', 'Wawan', 'MK23', 'fgfgg', '2021-05-19 13:52:06', NULL, '<p>sdsdfdff</p>\r\n', 'tugas', 'SI', '6');
+(1, '218240037', 'Wawan', 'MK23', 'fgfgg', '2021-05-19 13:52:06', NULL, '<p>sdsdfdff</p>\r\n', 'tugas', 'SI', '6'),
+(2, '1234567890', 'Dosen', 'MK24', 'kerjakan dengan benar', '2021-05-20 15:03:09', NULL, '<p>Bismillah</p>\r\n', 'uts', 'SI', '6'),
+(3, '1234567890', 'Dosen', 'MK24', 'quiz', '2021-05-20 15:14:33', NULL, '<p>apa yang dimaksud dengan CMS ?</p>\r\n', 'quiz', 'SI', '6');
 
 -- --------------------------------------------------------
 
@@ -551,7 +584,7 @@ ALTER TABLE `uploaded_images`
 -- AUTO_INCREMENT untuk tabel `tblabsensi`
 --
 ALTER TABLE `tblabsensi`
-  MODIFY `idabsensi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idabsensi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbladmin`
@@ -563,37 +596,37 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT untuk tabel `tbldiskusi`
 --
 ALTER TABLE `tbldiskusi`
-  MODIFY `iddiskusi` int NOT NULL AUTO_INCREMENT;
+  MODIFY `iddiskusi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblgambar`
 --
 ALTER TABLE `tblgambar`
-  MODIFY `idgambar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idgambar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbljawaban`
 --
 ALTER TABLE `tbljawaban`
-  MODIFY `idjawaban` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idjawaban` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblmatakuliah_sec`
 --
 ALTER TABLE `tblmatakuliah_sec`
-  MODIFY `kodemk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `kodemk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblmateri`
 --
 ALTER TABLE `tblmateri`
-  MODIFY `idmateri` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idmateri` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblpengumuman`
 --
 ALTER TABLE `tblpengumuman`
-  MODIFY `idpengumuman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpengumuman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tblriwayatnilai`
@@ -623,7 +656,7 @@ ALTER TABLE `tblsoalpilgan`
 -- AUTO_INCREMENT untuk tabel `tbltugas`
 --
 ALTER TABLE `tbltugas`
-  MODIFY `idtugas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idtugas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `uploaded_images`
